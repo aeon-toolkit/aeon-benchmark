@@ -1,0 +1,9 @@
+numpy
+pandas
+scikit-learn
+statsmodels
+statsforecast
+aeon
+tsml-eval
+numba
+

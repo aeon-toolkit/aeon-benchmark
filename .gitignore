@@ -1,0 +1,9 @@
+# Ignore PyCharm project settings
+.idea/
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore Jupyter notebook checkpoints
+.ipynb_checkpoints/
