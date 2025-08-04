@@ -11,3 +11,8 @@ Algorithms used are implemented in the aeon-toolkit and/or scikit-learn.
 
 Examples can make use of tsml-eval, a toolkit used to run experiments.
 
+currently this requires the main branch of aeon, until version 1.3 is released. This can be installed directly 
+
+pip install git+https://github.com/aeon-toolkit/aeon.git@main
+
+
