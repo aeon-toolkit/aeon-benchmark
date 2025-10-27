@@ -1,0 +1,129 @@
+[build-system]
+requires = ["setuptools>=61", "wheel", "toml", "build"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aeon-benchmark"
+version = "0.1.0"
+description = "A package for benchmarking time series machine learning tools."
+authors = [
+    {name = "Tony Bagnall", email = "a.j.bagnall@soton.ac.uk"},
+]
+maintainers = [
+    {name = "Tony Bagnall", email = "a.j.bagnall@soton.ac.uk"},
+]
+readme = "README.md"
+keywords = [
+    "data-science",
+    "machine-learning",
+    "time-series",
+    "time-series-classification",
+    "time-series-regression",
+    "time-series-clustering",
+    "evaluation",
+    "benchmarking",
+]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Topic :: Scientific/Engineering",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+    "Operating System :: MacOS",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "aeon>=1.0.0,<1.3.0",
+    "tsml-eval>=0.6.0,<0.8.0",
+    "scikit-learn>=1.0.0,<1.8.0",
+    "matplotlib",
+    "statsmodels",
+    "statsforecast",
+    "numba",
+]
+
+[project.optional-dependencies]
+all_extras = [
+    "aeon[all_extras]",
+    "tsml[all_extras]",
+]
+unstable_extras = [
+    "aeon[unstable_extras]",
+    "tsml[unstable_extras]",
+]
+
+dev = [
+    "pre-commit",
+    "pytest",
+    "pytest-cov",
+    "pytest-randomly",
+    "pytest-timeout",
+    "pytest-xdist[psutil]",
+    "pytest-rerunfailures",
+]
+binder = [
+    "notebook",
+    "jupyterlab",
+]
+
+[project.urls]
+homepage = "https://www.timeseriesclassification.com/"
+repository = "https://github.com/aeon/aeon-benchmark/"
+
+[project.license]
+file = "LICENSE"
+
+[tool.setuptools.packages.find]
+include = ["aeon-benchmark"]
+
+[tool.check-manifest]
+ignore = [
+    # Ignore virtual environments in local builds
+    ".venv/**",
+    "venv/**",
+    # Ignore local files
+    "local/**",
+    "examples/generated_results/**",
+    # Ignore the docs symlinks and its contents
+    "docs/examples",
+    "docs/examples/**",
+    "docs/publications",
+    "docs/publications/**",
+]
+
+[tool.ruff.lint]
+select = ["D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.mypy]
+ignore_missing_imports = true
+follow_imports = "silent"
+
+
+[tool.pytest.ini_options]
+testpaths = "aeon-benchmark"
+addopts = '''
+    --doctest-modules
+    --durations 20
+    --timeout 600
+    --showlocals
+    --dist worksteal
+    --reruns 2
+    --only-rerun "crashed while running"
+    --meminterval 0.1
+'''
+
+[tool.codespell]
+ignore-words = ".github/utilities/codespell_ignore_words.txt"
+ignore-regex = '(^\s*"image/\S+": ".*|"som")'
+skip = ".venv,.idea,.mypy_cache,.git"
+check-filenames = true
+check-hidden = true
