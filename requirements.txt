@@ -6,4 +6,4 @@ statsforecast
 aeon
 tsml-eval
 numba
-
+tslearn
