@@ -305,6 +305,21 @@ def simulate_many_ets(
                                   "y": series}))
     return pd.concat(rows, ignore_index=True)
 
+def generate_real_ets(dataset, n=100, seed=None):
+    if seed is None:
+        series_no = 0
+    else:
+        series_no = seed % len(dataset)
+    y = dataset[series_no]
+    while len(y) < n:
+        series_no += 1
+        if (series_no) >= len(dataset):
+            series_no = 0
+        y = dataset[series_no]
+    print(series_no)
+    return y[:n]
+
+
 # -----------------------------
 # Quick examples
 # -----------------------------
